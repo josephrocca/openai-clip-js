@@ -39,32 +39,6 @@
         const data = results["output"].data;
         console.log(`data of result tensor 'output'`, data);
       }
-
-      async function getRgbData(imgUrl) {
-        let blob = await fetch(imgUrl, {referrer:""}).then(r => r.blob());
-        let img = await createImageBitmap(blob);
-
-        let canvas = new OffscreenCanvas(224, 224);
-        let ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-        let rgbData = [[], [], []]; // [r, g, b]
-        // remove alpha and put into correct shape:
-        let d = imageData.data;
-        for(let i = 0; i < d.length; i += 4) { 
-          let x = (i/4) % canvas.width;
-          let y = Math.floor((i/4) / canvas.width)
-          if(!rgbData[0][y]) rgbData[0][y] = [];
-          if(!rgbData[1][y]) rgbData[1][y] = [];
-          if(!rgbData[2][y]) rgbData[2][y] = [];
-          rgbData[0][y][x] = (d[i+0]/255) * 2 - 1;
-          rgbData[1][y][x] = (d[i+1]/255) * 2 - 1;
-          rgbData[2][y][x] = (d[i+2]/255) * 2 - 1;
-        }
-        rgbData = Float32Array.from(rgbData.flat().flat());
-        return rgbData;
-      }
     </script>
   </body>
 </html>
