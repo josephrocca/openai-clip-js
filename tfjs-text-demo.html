@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenAI CLIP JavaScript - Text Demo - tfjs</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@3.11.0/dist/tf-backend-wasm.js"></script>
+    
+    <div>
+      input text <input id="textInputEl" value="hello world!">
+      backend: <select id="backendSelectEl">
+        <option>wasm</option>
+        <option>webgl</option>
+      </select>
+      <button id="startBtn" onclick="main()">start</button>
+    </div>
+    <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a></p>
+    
+    <script>
+      async function main() {
+        startBtn.disabled = true;
+        startBtn.innerHTML = "see console";
+
+        await tf.setBackend(backendSelectEl.value);
+        
+        console.log("Loading model... (see network tab for progress)");
+        let modelPath = './clip-text-vit-32-tfjs/model.json';
+        let model = await tf.loadGraphModel(modelPath);
+        console.log("Model loaded.");
+        
+        let Tokenizer = (await import("https://deno.land/x/clip_bpe@v0.0.6/mod.js")).default;
+        let t = new Tokenizer();
+        let textTokens = t.encodeForCLIP(textInputEl.value);
+        textTokens = Float32Array.from(textTokens);
+        let input = {'input': tf.tensor(textTokens, [1, 77], "float32")};
+
+        console.log("Running inference...");
+        const results = await model.execute(input, ["output"]);
+        debugger;
+        console.log("Finished inference.");
+
+        const data = results["output"].data;
+        console.log(`data of result tensor 'output'`, data);
+      }
+
+    </script>
+  </body>
+</html>
