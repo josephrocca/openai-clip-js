@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OpenAI CLIP JavaScript - ONNX Web Runtime</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.9.0/dist/ort.js"></script>
+    
+    <div>
+      imgur.com url (ideally square): <input id="imgUrlInput" value="https://i.imgur.com/WEIKDpX.jpg">
+      backend: <select id="backendSelectEl">
+        <option>wasm</option>
+        <option>webgl</option>
+      </select>
+      <button id="startBtn" onclick="main()">start</button>
+    </div>
+    <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a></p>
+    
+    <script>
+      async function main() {
+        startBtn.disabled = true;
+        startBtn.innerHTML = "see console";
+        
+        console.log("Loading model...");
+        // let modelPath = backendSelectEl.value === "webgl" ? './clip-image-vit-32-int32-float32.onnx' : './clip-image-vit-32-float32.onnx';
+        let modelPath = './clip-image-vit-32-float32.onnx';
+        const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
+        console.log("Model loaded.");
+
+        let rgbData = await getRgbData(imgUrlInput.value);
+
+        const feeds = {'input': new ort.Tensor('float32', rgbData, [1,3,224,224])};
+
+        console.log("Running inference...");
+        const results = await session.run(feeds);
+        console.log("Finished inference.");
+
+        const data = results["output"].data;
+        console.log(`data of result tensor 'output'`, data);
+      }
+
+      async function getRgbData(imgUrl) {
+        let blob = await fetch(imgUrl, {referrer:""}).then(r => r.blob());
+        let img = await createImageBitmap(blob);
+
+        let canvas = new OffscreenCanvas(224, 224);
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        let rgbData = [[], [], []]; // [r, g, b]
+        // remove alpha and put into correct shape:
+        let d = imageData.data;
+        for(let i = 0; i < d.length; i += 4) { 
+          let x = (i/4) % canvas.width;
+          let y = Math.floor((i/4) / canvas.width)
+          if(!rgbData[0][y]) rgbData[0][y] = [];
+          if(!rgbData[1][y]) rgbData[1][y] = [];
+          if(!rgbData[2][y]) rgbData[2][y] = [];
+          rgbData[0][y][x] = (d[i+0]/255) * 2 - 1;
+          rgbData[1][y][x] = (d[i+1]/255) * 2 - 1;
+          rgbData[2][y][x] = (d[i+2]/255) * 2 - 1;
+        }
+        rgbData = Float32Array.from(rgbData.flat().flat());
+        return rgbData;
+      }
+    </script>
+  </body>
+</html>
