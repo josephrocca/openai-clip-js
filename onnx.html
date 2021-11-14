@@ -21,9 +21,9 @@
         startBtn.disabled = true;
         startBtn.innerHTML = "see console";
         
-        console.log("Loading model...");
+        console.log("Loading model... (see network tab for progress)");
         // let modelPath = backendSelectEl.value === "webgl" ? './clip-image-vit-32-int32-float32.onnx' : './clip-image-vit-32-float32.onnx';
-        let modelPath = './clip-image-vit-32-float32.onnx';
+        let modelPath = 'https://whitelist-cors-proxy-do-not-delete.glitch.me/api?url=https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-float32.onnx';
         const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
         console.log("Model loaded.");
 
