@@ -1,11 +1,12 @@
 # OpenAI CLIP JavaScript
 OpenAI's CLIP model ported to JavaScript using the ONNX web runtime.
 
-Demo: https://josephrocca.github.io/openai-clip-js/onnx-image-demo.html
+Demos:
+* Image encoder (**working**): https://josephrocca.github.io/openai-clip-js/onnx-image-demo.html
+* Text encoder (**not** working - [issue](https://github.com/microsoft/onnxruntime/issues/9760)): https://josephrocca.github.io/openai-clip-js/onnx-text-demo.html
 
 **Todo:**
 * Normalize input images according to dataset mean + stdev per CLIP repo: `Normalize(mean=(0.48145466, 0.4578275, 0.40821073), std=(0.26862954, 0.26130258, 0.27577711))`
-* Add the text encoder (and [tokenizer](https://github.com/josephrocca/clip-bpe-js)).
 
 **Notes:**
 
