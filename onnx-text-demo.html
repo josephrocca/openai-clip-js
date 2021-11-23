@@ -17,6 +17,10 @@
     <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a></p>
     
     <script>
+      if(self.crossOriginIsolated) { // needs to be cross-origin-isolated to use wasm threads. you need to add these two headers: https://web.dev/coop-coep/
+        ort.env.wasm.numThreads = navigator.hardwareConcurrency
+      }
+      
       async function main() {
         startBtn.disabled = true;
         startBtn.innerHTML = "see console";
