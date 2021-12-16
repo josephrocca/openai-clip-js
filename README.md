@@ -6,7 +6,7 @@ Demos:
 * Text encoder (**not** working - [issue](https://github.com/microsoft/onnxruntime/issues/9760)): https://josephrocca.github.io/openai-clip-js/onnx-text-demo.html
 
 **Todo:**
-*  Get text encoder working and ensure astronaut text ("a portrait of an astronaut with the American flag") matches this embedding: `[-1.6626e-01,  5.2277e-02, -1.5332e-01,  4.4946e-01,  2.0667e-01, -2.9565e-01,  4.0588e-02, -4.1016e-01, -1.5027e-01,  3.1934e-01, -6.9702e-02, -2.5488e-01,  1.2335e-01, -9.5337e-02,  2.4109e-01, -4.8950e-02,  2.6074e-01,  5.3835e-04,  2.1033e-01,  3.7012e-01, ................... , 3.6401e-01, -1.6357e-01, -2.0984e-01, -1.3220e-01, -6.7322e-02, 2.0117e-01, -4.7583e-01,  6.8054e-02,  2.2437e-01,  2.6709e-01, -5.4626e-02, -4.0741e-02,  5.2002e-02, -1.8872e-01,  3.1372e-01, -1.3574e-01, -2.6538e-01]`
+*  Get text encoder working and ensure astronaut text ("This is a portrait of an astronaut with the American flag") matches this embedding: `[-1.6650e-01,  5.1666e-02, -1.5320e-01,  4.4922e-01,  2.0642e-01, -2.9565e-01,  4.0405e-02, -4.1064e-01, -1.5015e-01,  3.1934e-01, -6.8420e-02, -2.5464e-01,  1.2311e-01, -9.5093e-02,  2.4109e-01, -4.8828e-02,  2.6074e-01,  4.4537e-04,  2.0972e-01,  3.6987e-01, 4.5703e-01,  3.9771e-01,  3.1616e-01,  3.9551e-01,  1.4023e-02, -4.3457e-02,  4.9408e-02,  3.7231e-01,  1.1670e-01, -3.7256e-01, -2.7246e-01,  3.3105e-01,  5.4980e-01, -2.9633e-02, -2.5806e-01, -9.9365e-02,  ...]`
 * Try tfjs runtime if [this issue](https://github.com/tensorflow/tfjs/issues/5847) gets resolved.
 
 **Notes:**
