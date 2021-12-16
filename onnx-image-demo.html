@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0/dist/ort.js"></script>
     
     <div>
-      imgur.com url (ideally square): <input id="imgUrlInput" value="https://i.imgur.com/RKsLoNB.png">
+      imgur.com url (ideally 224x224): <input id="imgUrlInput" value="https://i.imgur.com/RKsLoNB.png">
       <!-- karpathy: https://i.imgur.com/WEIKDpX.jpg -->
       <!-- 512px astronaut: https://i.imgur.com/ec4Ao4s.png -->
       backend: <select id="backendSelectEl">
@@ -19,7 +19,7 @@
     <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a> - <a href="https://huggingface.co/rocca/openai-clip-js/tree/main">huggingface repo</a></p>
     
     <script>
-      if(self.crossOriginIsolated) { // needs to be cross-origin-isolated to use wasm threads. you need to add these two headers: https://web.dev/coop-coep/
+      if(self.crossOriginIsolated) { // needs to be cross-origin-isolated to use wasm threads. you need to serve this html file with these two headers: https://web.dev/coop-coep/
         ort.env.wasm.numThreads = navigator.hardwareConcurrency
       }
       
