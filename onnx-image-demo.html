@@ -7,7 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0/dist/ort.js"></script>
     
     <div>
-      imgur.com url (ideally square): <input id="imgUrlInput" value="https://i.imgur.com/ec4Ao4s.png"> <!-- https://i.imgur.com/WEIKDpX.jpg -->
+      imgur.com url (ideally square): <input id="imgUrlInput" value="https://i.imgur.com/RKsLoNB.png">
+      <!-- karpathy: https://i.imgur.com/WEIKDpX.jpg -->
+      <!-- 512px astronaut: https://i.imgur.com/ec4Ao4s.png -->
       backend: <select id="backendSelectEl">
         <option>wasm</option>
         <option>webgl</option>
@@ -25,7 +27,7 @@
         startBtn.disabled = true;
         startBtn.innerHTML = "see console";
         
-        console.log("Loading model... (see network tab for progress)");
+        console.log("Downloading model... (see network tab for progress)");
         // let modelPath = backendSelectEl.value === "webgl" ? './clip-image-vit-32-int32-float32.onnx' : './clip-image-vit-32-float32.onnx';
         let modelPath = 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-float32.onnx';
         const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
