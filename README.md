@@ -5,6 +5,9 @@ OpenAI's CLIP model ported to JavaScript using the ONNX web runtime.
 * Image model: https://josephrocca.github.io/openai-clip-js/onnx-image-demo.html
 * Text model: https://josephrocca.github.io/openai-clip-js/onnx-text-demo.html
 
+**Example applications**:
+* Sorting images a folder of images using a text prompt: https://github.com/josephrocca/clip-image-sorter
+
 **Notes:**
 
 * Models are served to the browser directly from [this HuggingFace 🤗 repo](https://huggingface.co/rocca/openai-clip-js/tree/main)
