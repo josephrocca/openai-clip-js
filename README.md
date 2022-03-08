@@ -6,7 +6,7 @@ OpenAI's CLIP model ported to JavaScript using the ONNX web runtime.
 * Text model: https://josephrocca.github.io/openai-clip-js/onnx-text-demo.html
 
 **Example applications**:
-* Sorting images a folder of images using a text prompt: https://github.com/josephrocca/clip-image-sorter
+* Sorting a local folder of images using a text prompt: https://github.com/josephrocca/clip-image-sorter
 
 **Notes:**
 
