@@ -4,14 +4,10 @@
     <title>OpenAI CLIP JavaScript - Text Demo - ONNX Web Runtime</title>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.9.0/dist/ort.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.10.0/dist/ort.js"></script>
     
     <div>
       input text <input id="textInputEl" value="This is a portrait of an astronaut with the American flag">
-      backend: <select id="backendSelectEl">
-        <option>wasm</option>
-        <option>webgl</option>
-      </select>
       <button id="startBtn" onclick="main()">start</button>
     </div>
     <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a></p>
@@ -26,8 +22,8 @@
         startBtn.innerHTML = "see console";
         
         console.log("Loading model... (see network tab for progress)");
-        let modelPath = 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-text-vit-32-float32.onnx';
-        const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
+        let modelPath = 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-text-vit-32-float32-int32.onnx';
+        const session = await ort.InferenceSession.create(modelPath, { executionProviders: ["wasm"] });
         console.log("Model loaded.");
         
         let Tokenizer = (await import("https://deno.land/x/clip_bpe@v0.0.6/mod.js")).default;
