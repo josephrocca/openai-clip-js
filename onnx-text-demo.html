@@ -29,8 +29,8 @@
         let Tokenizer = (await import("https://deno.land/x/clip_bpe@v0.0.6/mod.js")).default;
         let t = new Tokenizer();
         let textTokens = t.encodeForCLIP(textInputEl.value);
-        textTokens = Float32Array.from(textTokens);
-        const feeds = {'input': new ort.Tensor('float32', textTokens, [1, 77])};
+        textTokens = Int32Array.from(textTokens);
+        const feeds = {'input': new ort.Tensor('int32', textTokens, [1, 77])};
 
         console.log("Running inference...");
         const results = await session.run(feeds);
