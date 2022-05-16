@@ -1,5 +1,5 @@
 # OpenAI CLIP JavaScript
-OpenAI's CLIP model ported to JavaScript using the ONNX web runtime.
+OpenAI's CLIP model ported to JavaScript using the ONNX web runtime. I also got the LiT models working [here](https://github.com/josephrocca/lit-encoder-js).
 
 **Minimal demos**:
 * Image model: https://josephrocca.github.io/openai-clip-js/onnx-image-demo.html
