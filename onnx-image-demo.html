@@ -33,7 +33,7 @@
         
         console.log("Downloading model... (see network tab for progress)");
         // let modelPath = backendSelectEl.value === "webgl" ? './clip-image-vit-32-int32-float32.onnx' : './clip-image-vit-32-float32.onnx';
-        let modelPath = quantizedSelectEl.value === "no" : 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-float32.onnx' ? 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-uint8.onnx';
+        let modelPath = quantizedSelectEl.value === "no" ? 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-float32.onnx' : 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-image-vit-32-uint8.onnx';
         const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
         console.log("Model loaded.");
 
