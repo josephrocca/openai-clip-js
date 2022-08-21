@@ -10,14 +10,17 @@
       imgur.com url (ideally 224x224): <input id="imgUrlInput" value="https://i.imgur.com/RKsLoNB.png">
       <!-- karpathy: https://i.imgur.com/WEIKDpX.jpg -->
       <!-- 512px astronaut: https://i.imgur.com/ec4Ao4s.png -->
+      <br>
       backend: <select id="backendSelectEl">
         <option>wasm</option>
         <option>webgl (doesn't work yet)</option>
       </select>
+      <br>
       quantized: <select id="quantizedSelectEl">
         <option value="no">no</option>
         <option value="yes">yes (4x smaller model, but currently the embeddings are inaccurate - see readme)</option>
       </select>
+      <br>
       <button id="startBtn" onclick="main()">start</button>
     </div>
     <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a> - <a href="https://huggingface.co/rocca/openai-clip-js/tree/main">huggingface repo</a></p>
