@@ -9,6 +9,11 @@
     <div>
       input text <input id="textInputEl" value="This is a portrait of an astronaut with the American flag">
       <button id="startBtn" onclick="main()">start</button>
+      <br>
+      quantized: <select id="quantizedSelectEl">
+        <option value="no">no</option>
+        <option value="yes">yes (4x smaller model)</option>
+      </select>
     </div>
     <p><a href="https://github.com/josephrocca/openai-clip-js">github repo</a></p>
     
@@ -22,7 +27,7 @@
         startBtn.innerHTML = "see console";
         
         console.log("Loading model... (see network tab for progress)");
-        let modelPath = 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-text-vit-32-float32-int32.onnx';
+        let modelPath = quantizedSelectEl.value === "no" ? 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-text-vit-32-float32-int32.onnx' : 'https://huggingface.co/rocca/openai-clip-js/resolve/main/clip-text-vit-32-uint8.onnx';
         const session = await ort.InferenceSession.create(modelPath, { executionProviders: ["wasm"] });
         console.log("Model loaded.");
         
