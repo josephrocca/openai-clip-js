@@ -53,13 +53,41 @@
         console.log(`data of result tensor 'output'`, data);
       }
       
-      async function getRgbData(imgUrl) {
+      async function getRgbData(imgUrl, mode="resizeAndCenterCrop") {
         let blob = await fetch(imgUrl, {referrer:""}).then(r => r.blob());
         let img = await createImageBitmap(blob);
 
-        let canvas = new OffscreenCanvas(224, 224);
+        let canvas;
+        if(window.document) {
+          canvas = document.createElement("canvas");
+          canvas.width = 224;
+          canvas.height = 224;
+        } else {
+          new OffscreenCanvas(224, 224);
+        }
+
         let ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        if(mode === "resizeAndCenterCrop") {
+          // scale img to fit the shorter side to the canvas size
+          let scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+          
+          // compute new image dimensions that would maintain the original aspect ratio
+          let scaledW = img.width * scale;
+          let scaledH = img.height * scale;
+          
+          // compute position to center the image
+          let posX = (canvas.width - scaledW) / 2;
+          let posY = (canvas.height - scaledH) / 2;
+          
+          // draw the image centered and scaled on the canvas
+          ctx.drawImage(img, posX, posY, scaledW, scaledH);
+        } else if(mode === "squash") {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
+
+        if(window.document) document.body.appendChild(canvas); // can be removed - just to visualize the crop
+        
         let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
         let rgbData = [[], [], []]; // [r, g, b]
