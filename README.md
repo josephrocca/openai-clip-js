@@ -8,6 +8,10 @@ OpenAI's CLIP model ported to JavaScript using the ONNX web runtime. I also got 
 **Example applications**:
 * Sorting/searching a local folder of images using a text prompt: https://github.com/josephrocca/clip-image-sorter
 
+**Server side**:
+* https://github.com/josephrocca/openai-clip-js/blob/main/deno-example.js
+* https://github.com/josephrocca/openai-clip-js/blob/main/nodejs-example.js
+
 **Notes:**
 
 * The model files are about **4x** larger than they actually need to be - params are float32 instead of uint8. If you're using CLIP in a "real" web app, you should probably quantize it. [@minimaxir](https://github.com/minimaxir) has done it ([1](https://github.com/minimaxir/imgbeddings/blob/36fb4d7ac6b82694d109cef6f887d4cb9c49da0f/imgbeddings/models.py#L94), [2](https://huggingface.co/minimaxir/imgbeddings/blob/main/patch32_v1.onnx)), and that model [worked first try](https://jsbin.com/nupehazaju/edit?html,output) with ORT Web (which is amazing), but it outputs a 768 element vector instead of 512, which I think is because @minimaxir's model is missing the final projection head which puts image embeddings into same-sized space as text embeddings. I had a quick attempt at it in [the ONNX export notebook](https://colab.research.google.com/github/josephrocca/openai-clip-js/blob/main/Export_CLIP_to_ONNX_tflite_tfjs_tf_saved_model.ipynb) (see cell after ONNX conversion), but it doesn't seem to be working. If you investigate this and get it working, please open an issue. Thanks to [@congraIiIso](https://twitter.com/congraIiIso) on Twitter for bringing the uint8 quantization to my attention! **Edit**: I've managed to get quantization "working", but the embeddings that the quantized models produce don't seem to be close enough to the correct embeddings. See [this comment](https://github.com/josephrocca/openai-clip-js/issues/3#issuecomment-1221482824) for details.
