@@ -9,8 +9,8 @@ OpenAI's CLIP model ported to JavaScript using the ONNX web runtime. I also got 
 * Sorting/searching a local folder of images using a text prompt: https://github.com/josephrocca/clip-image-sorter
 
 **Server side**:
-* https://github.com/josephrocca/openai-clip-js/blob/main/deno-example.js
-* https://github.com/josephrocca/openai-clip-js/blob/main/nodejs-example.js
+* Deno: https://github.com/josephrocca/openai-clip-js/blob/main/deno-example.js
+* Node.js: https://github.com/josephrocca/openai-clip-js/blob/main/nodejs-example.js
 
 **Notes:**
 
