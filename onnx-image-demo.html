@@ -41,6 +41,9 @@
         const session = await ort.InferenceSession.create(modelPath, { executionProviders: [backendSelectEl.value] });
         console.log("Model loaded.");
 
+        // for console debugging:
+        window.session = session;
+
         let rgbData = await getRgbData(imgUrlInput.value);
 
         const feeds = {'input': new ort.Tensor('float32', rgbData, [1,3,224,224])};
