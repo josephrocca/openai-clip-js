@@ -5,7 +5,7 @@
 
 Here's a full working example:
 ```js
-let quantized = false; // change to `true` for a much smaller model (e.g. 87mb vs 345mb for image model), but lower  accuracy
+let quantized = false; // change to `true` for a much smaller model (e.g. 87mb vs 345mb for image model), but lower accuracy
 let { AutoProcessor, CLIPVisionModelWithProjection, RawImage, AutoTokenizer, CLIPTextModelWithProjection } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.min.js');
 let imageProcessor = await AutoProcessor.from_pretrained('Xenova/clip-vit-base-patch16');
 let visionModel = await CLIPVisionModelWithProjection.from_pretrained('Xenova/clip-vit-base-patch16', {quantized});
