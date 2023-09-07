@@ -43,6 +43,20 @@ console.log(similarity);
 ```
 Note that the above code uses `clip-vit-base-patch16` instead of what's used in this repo, `clip-vit-base-patch32` - not sure which is best, but you can change `patch16` to `patch32` in the above code if you want to test it. Also note that you'll see some `GET`/network errors in the console - that's expected, since Transformers.js tries to load models locally first. There's probably a way to disable this.
 
+Transformers.js also has a **ton** of other models available, and it's quite easy to use. E.g. here's an example of a text embedding / retrieval model:
+```js
+let { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.min.js');
+let extractor = await pipeline('feature-extraction', 'Xenova/e5-large-v2');
+let dotProduct = (vec1, vec2) => vec1.reduce((sum, val, i) => sum + val * vec2[i], 0);
+
+let passage1 = await extractor('passage: She likes carrots and celery.', { pooling: 'mean', normalize: true });
+let passage2 = await extractor('passage: This is a good calculus guide.', { pooling: 'mean', normalize: true });
+let query = await extractor('query: Taking care of rabbits', { pooling: 'mean', normalize: true });
+
+let similarity1 = dotProduct(query.data, passage1.data);
+let similarity2 = dotProduct(query.data, passage2.data);
+```
+
 ---
 
 # OpenAI CLIP JavaScript
