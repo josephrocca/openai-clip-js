@@ -41,7 +41,7 @@ console.log(text_embeds.data);
 let similarity = cosineSimilarity(image_embeds.data, text_embeds.data);
 console.log(similarity);
 ```
-Note that the above code uses `clip-vit-base-patch16` instead of what's used in this repo, `clip-vit-base-patch32` - not sure which is best, but you can change `patch16` to `patch32` in the above code if you want to test it. Also note that you'll see some `GET`/network errors in the console - that's expected, since Transformers.js tries to load models locally first. There's probably a way to disable this.
+Note that the above code uses `clip-vit-base-patch16` instead of what's used in this repo, `clip-vit-base-patch32` - not sure which is best, but you can change `patch16` to `patch32` in the above code if you want to test it. Also note that you'll see some `GET`/`404` errors in the console - that's expected, since Transformers.js tries to load models locally first. There's probably a way to disable this.
 
 Transformers.js also has a **ton** of other models available, and it's quite easy to use. E.g. here's an example of a text embedding / retrieval model:
 ```js
