@@ -1,3 +1,22 @@
+**NOTE**: You may want to use [Transformers.js](https://github.com/xenova/transformers.js) instead since it's well-maintained and supports quantized models which are much smaller:
+
+ * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPTextModelWithProjection
+ * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPVisionModelWithProjection
+
+For example, with the image model:
+```js
+let quantized = false; // change to `true` for a much smaller model (80 vs 300+ mb, but lower  accuracy)
+let { AutoProcessor, CLIPVisionModelWithProjection, RawImage} = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.min.js');
+let processor = await AutoProcessor.from_pretrained('Xenova/clip-vit-base-patch32');
+let vision_model = await CLIPVisionModelWithProjection.from_pretrained('Xenova/clip-vit-base-patch32', {quantized});
+let image = await RawImage.read('https://i.imgur.com/RKsLoNB.png');
+let image_inputs = await processor(image);
+let { image_embeds } = await vision_model(image_inputs);
+console.log(image_embeds.data);
+```
+
+---
+
 # OpenAI CLIP JavaScript
 OpenAI's CLIP model ported to JavaScript using the ONNX web runtime. I also got the LiT models working [here](https://github.com/josephrocca/lit-encoder-js).
 
