@@ -3,7 +3,7 @@
  * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPTextModelWithProjection
  * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPVisionModelWithProjection
 
-Here's a full working example:
+Here's a full working example that uses Transformers.js:
 ```js
 let quantized = false; // change to `true` for a much smaller model (e.g. 87mb vs 345mb for image model), but lower accuracy
 let { AutoProcessor, CLIPVisionModelWithProjection, RawImage, AutoTokenizer, CLIPTextModelWithProjection } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.js');
