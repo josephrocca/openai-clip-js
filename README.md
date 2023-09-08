@@ -6,7 +6,7 @@
 Here's a full working example:
 ```js
 let quantized = false; // change to `true` for a much smaller model (e.g. 87mb vs 345mb for image model), but lower accuracy
-let { AutoProcessor, CLIPVisionModelWithProjection, RawImage, AutoTokenizer, CLIPTextModelWithProjection } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.min.js');
+let { AutoProcessor, CLIPVisionModelWithProjection, RawImage, AutoTokenizer, CLIPTextModelWithProjection } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.js');
 let imageProcessor = await AutoProcessor.from_pretrained('Xenova/clip-vit-base-patch16');
 let visionModel = await CLIPVisionModelWithProjection.from_pretrained('Xenova/clip-vit-base-patch16', {quantized});
 let tokenizer = await AutoTokenizer.from_pretrained('Xenova/clip-vit-base-patch16');
@@ -45,7 +45,7 @@ Note that the above code uses `clip-vit-base-patch16` instead of what's used in 
 
 Transformers.js also has a **ton** of other models available, and it's quite easy to use. E.g. here's an example of a text embedding / retrieval model:
 ```js
-let { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.min.js');
+let { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.5.4/dist/transformers.js');
 let extractor = await pipeline('feature-extraction', 'Xenova/e5-large-v2');
 let dotProduct = (vec1, vec2) => vec1.reduce((sum, val, i) => sum + val * vec2[i], 0);
 
