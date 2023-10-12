@@ -1,4 +1,6 @@
-**NOTE (Sept 7th 2023)**: At this point you may want to use [Transformers.js](https://github.com/xenova/transformers.js) instead since it's well-maintained and supports quantized models which are much smaller:
+**NOTE (Sept 7th 2023)**: At this point you *may* want to use [Transformers.js](https://github.com/xenova/transformers.js) instead since it's well-maintained and supports quantized models which are much smaller. That said, if you don't want to include the whole Transformers.js library in your app (as of writing I'm not sure if [tree-shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) is supported yet), then you can still directly use ONNX Runtime Web with the quantized models produced by the [Transformers.js conversion scripts](https://huggingface.co/docs/transformers.js/custom_usage#convert-your-models-to-onnx).
+
+Here are the relevant modules for Transformers.js:
 
  * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPTextModelWithProjection
  * https://huggingface.co/docs/transformers.js/api/models#module_models.CLIPVisionModelWithProjection
